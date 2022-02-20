@@ -1,5 +1,9 @@
-# DailyTags: markdown library with support of custom tags
-DailyTags converts a given markup into rich text for Jetpack Compose. It comes with Markdown and HTML support by default (please, see list of supported features) and is very easy to extend to support custom markups.
+# DailyTags
+[![](https://jitpack.io/v/DmytroShuba/DailyTags.svg)](https://jitpack.io/#DmytroShuba/DailyTags)
+
+DailyTags is a flexible markdown library that supports custom tags and markups.
+
+The library parses a given markup into rich text for Jetpack Compose. DailyTags comes with Markdown and HTML support by default (please, see the [supported features](https://github.com/DmytroShuba/DailyTags/wiki/Supported-features)) and is very easy to extend to support custom markups.
 
 ![daily tags demo picture](screenshots/intro.png)
 
@@ -7,9 +11,10 @@ The library parses text source into nodes which are then styled using [Annotated
 
 DailyTags aims to be:
 - ⚡ fast
-- 🪶 lightweight
+- 🪶 lightweight(less than 50kb)
 - 👋 easy to use
 - 🏗️ extensible
+- 📎 flexible
 
 The library provides defaults to display Markdown content along with giving all the means to tweak the appearance as much as you wish!This repository contains DailyTags source code and a sample app.
 
@@ -18,53 +23,53 @@ The library provides defaults to display Markdown content along with giving all 
 Add the following configuration to the `build.gradle` files:
 ```groovy
 allprojects {
-   repositories {
-      ...
-      maven { url 'https://jitpack.io' }
-   }
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
 ```groovy
 dependencies {
-    implementation 'com.dmytroshuba:dailytags:1.0.0'
+    implementation "com.github.DmytroShuba:DailyTags:1.0.0"
 }
 ```
 
 ## 🔨 Usage
 ### Markdown
-DailyTags supports most of the Markdown features, but not all ([the list of supported features]()).
+DailyTags supports most of the Markdown features, but not all ([the supported features](https://github.com/DmytroShuba/DailyTags/wiki/Supported-features)).
 
 To parse Markdown content use SimpleMarkupParser and MarkdownRules together:
 ```kotlin
     val source = "<b>Hello world</b>"
-    val rules = MarkdownRules.toList()
-    val parser = SimpleMarkupParser()
-    val content = parser
-        .parse(source, rules)
-        .render()
-        .toAnnotatedString()
+val rules = MarkdownRules.toList()
+val parser = SimpleMarkupParser()
+val content = parser
+    .parse(source, rules)
+    .render()
+    .toAnnotatedString()
 
-    Text(text = content)
+Text(text = content)
 ```
 
 ### Markdown and HTML
 ```kotlin
     val source = "<b>Hello world</b>"
-    val rules = MarkdownRules.toList() + HtmlRules.toList()
-    val parser = SimpleMarkupParser()
-    val content = parser
-        .parse(source, rules)
-        .render()
-        .toAnnotatedString()
+val rules = MarkdownRules.toList() + HtmlRules.toList()
+val parser = SimpleMarkupParser()
+val content = parser
+    .parse(source, rules)
+    .render()
+    .toAnnotatedString()
 
-    Text(text = content)
+Text(text = content)
 ```
 
 ### Custom tags
 Let's create a tag for highlighting text with blue color. First, create a pattern with a regular expression to find the specified content:
 ```kotlin
-val PATTERN_HIGHLIGHT_BLUE = Pattern("^<hl-blue>([\s\S]+?)<\/hl-blue>")
+val PATTERN_HIGHLIGHT_BLUE = Pattern.compile("^<hl-blue>([\s\S]+?)<\/hl-blue>")
 ```
 Now create a rule with it which will content the pattern and styling configuration for the matched content:
 ```kotlin
@@ -74,21 +79,23 @@ Then simply add your rule when parsing the content:
 
 ```kotlin
     val parser = SimpleMarkupParser()
-    val rules = listOf(blueRule, ...)
-    val content = parser
-       .parse(source, rules)
-       .render()
-       .toAnnotatedString()
+val rules = listOf(blueRule, ...)
+val content = parser
+    .parse(source, rules)
+    .render()
+    .toAnnotatedString()
 ```
+
+See a detailed step by step guide [here](https://github.com/DmytroShuba/DailyTags/wiki/Add-custom-tags-and-markups).
 
 ## 🔎 Wiki
 More documentation is going to be released soon so stay tuned!
 For more information you can:
-- visit DailyTags [Wiki page]()
+- visit DailyTags [Wiki page](https://github.com/DmytroShuba/DailyTags/wiki)
 - see the sample application that is included to this repository
 - explore source code to see how Markdown is implemented.
 
-If you have a problem using DailyTag please see [Troubleshooting]() page. It might be already answered!
+If you have a problem using DailyTag please see [Troubleshooting](https://github.com/DmytroShuba/DailyTags/wiki/Troubleshooting) page. It might be already answered!
 
 ## 📄 License
 
