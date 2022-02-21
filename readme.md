@@ -1,5 +1,6 @@
 # DailyTags
 [![](https://jitpack.io/v/DmytroShuba/DailyTags.svg)](https://jitpack.io/#DmytroShuba/DailyTags)
+[![API](https://img.shields.io/badge/API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
 DailyTags is a flexible markdown library that supports custom tags and markups.
 
@@ -67,18 +68,18 @@ Text(text = content)
 ```
 
 ### Custom tags
-Let's create a tag for highlighting text with blue color. First, create a pattern with a regular expression to find the specified content:
+1. Create a pattern with a regular expression to find the specified content.
 ```kotlin
 val PATTERN_HIGHLIGHT_BLUE = Pattern.compile("^<hl-blue>([\s\S]+?)<\/hl-blue>")
 ```
-Now create a rule with it which will content the pattern and styling configuration for the matched content:
+2. Create rules for your patterns. A rule includes the pattern and styling configuration for the matched content:
 ```kotlin
 val blueRule = PATTERN_HIGHLIGHT_BLUE.toRule(spanStyles = SpanStyle(color = Color.Blue))
 ```
-Then simply add your rule when parsing the content:
+3. Use custom rules when parsing the content:
 
 ```kotlin
-    val parser = SimpleMarkupParser()
+val parser = SimpleMarkupParser()
 val rules = listOf(blueRule, ...)
 val content = parser
     .parse(source, rules)
