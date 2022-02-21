@@ -43,7 +43,7 @@ DailyTags supports most of the Markdown features, but not all ([the supported fe
 
 To parse Markdown content use SimpleMarkupParser and MarkdownRules together:
 ```kotlin
-    val source = "<b>Hello world</b>"
+val source = "<b>Hello world</b>"
 val rules = MarkdownRules.toList()
 val parser = SimpleMarkupParser()
 val content = parser
@@ -56,7 +56,7 @@ Text(text = content)
 
 ### Markdown and HTML
 ```kotlin
-    val source = "<b>Hello world</b>"
+val source = "<b>Hello world</b>"
 val rules = MarkdownRules.toList() + HtmlRules.toList()
 val parser = SimpleMarkupParser()
 val content = parser
