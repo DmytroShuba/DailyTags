@@ -57,7 +57,7 @@ Text(text = content)
 ### Markdown and HTML
 ```kotlin
 val source = "<b>Hello world</b>"
-val rules = MarkdownRules.toList() + HtmlRules.toList()
+val rules = MarkdownRules.toList().dropLast(1) + HtmlRules.toList() // dropLast removes the match-all PATTERN_TEXT regex.
 val parser = SimpleMarkupParser()
 val content = parser
     .parse(source, rules)
